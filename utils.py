@@ -11,6 +11,10 @@ def request_reports(addr):
 def print_at(x,y,s):
     sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % ( y, x, s))
     sys.stdout.flush()
-
+def print_at_mult(x,y,s):
+    ss = s.split("\n")
+    for i,_s in enumerate(ss):
+        sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % ( y+i, x, _s))
+        sys.stdout.flush()
 def clear():
     os.system("clear")

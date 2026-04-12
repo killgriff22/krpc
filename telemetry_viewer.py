@@ -24,6 +24,6 @@ while True:
     alt = altitude()
     apo = apoapsis()
     if dt > 1:
-        reports = request_reports()
+        pass#reports = request_reports()
     print_at(1, 1, f"Altitude: {alt} Apoapsis: {apo} Vel: {velocity}")
     #print_at(1, 2, f"")

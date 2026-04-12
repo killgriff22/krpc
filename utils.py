@@ -9,7 +9,7 @@ def request_reports(addr):
     return resp.json() 
 
 def print_at(x,y,s):
-    sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (x, y, s))
+    sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % ( y, x, s))
     sys.stdout.flush()
 
 def clear():

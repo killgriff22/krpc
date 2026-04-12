@@ -26,7 +26,7 @@ while True:
     if dt > 1:
         pass#reports = request_reports()
     print_i = 1
-    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs}")
+    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs}, Throttle: {control.throttle}")
     print_i += 1
     print_at(1, print_i, f"Altitude: {alt} Apoapsis: {apo}")
     print_i += 1

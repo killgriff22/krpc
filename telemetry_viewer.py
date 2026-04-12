@@ -26,6 +26,8 @@ while True:
     if dt > 1:
         pass#reports = request_reports()
     print_i = 1
+    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs}")
+    print_i += 1
     print_at(1, print_i, f"Altitude: {alt} Apoapsis: {apo}")
     print_i += 1
     print_at(1, print_i, f"Velocity:")
@@ -36,3 +38,21 @@ while True:
     print_i += 1
     print_at(1, print_i, f"Z: {velocity[2]}")
     print_i += 1
+    print_at(20, 20, """         /\\
+        /  \\
+       /    \\
+      /______\\
+     |        |
+     |        |
+     |        |
+     |        |
+     |        |
+     |        |
+    /|   ||   |\\
+   / |   ||   | \\
+  /  |   ||   |  \\
+ /___|   ||   |___\\
+     |        |
+      \      /
+       ||  ||
+""")

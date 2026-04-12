@@ -1,5 +1,8 @@
 import krpc
 import time
+
+message_reporter_address = "192.168.1.199"
+
 conn = krpc.connect(name='Ascent Guidance', address="192.168.1.191")
 vessel = conn.space_center.active_vessel
 control = vessel.control
@@ -51,8 +54,6 @@ parachute_flag_b = False
 parachute_flag_a = False
 while True:
     velocity = vessel.flight(ref_frame).velocity
-    vel = '%.1f %.1f %.1f' % velocity
-    vel.split(" ")
     alt = altitude()
     #x,y,z = [float(a) for a in vel]
     print('Surface velocity = (%.1f, %.1f, %.1f)' % velocity)

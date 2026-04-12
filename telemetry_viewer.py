@@ -25,8 +25,14 @@ while True:
     apo = apoapsis()
     if dt > 1:
         pass#reports = request_reports()
-    print_at(1, 1, f"Altitude: {alt} Apoapsis: {apo}")
-    print_at(1, 2, f"Velocity:")
-    print_at(1, 3, f"X: {velocity[0]}")
-    print_at(1, 4, f"Y: {velocity[1]}")
-    print_at(1, 5, f"Z: {velocity[2]}")
+    print_i = 1
+    print_at(1, print_i, f"Altitude: {alt} Apoapsis: {apo}")
+    print_i += 1
+    print_at(1, print_i, f"Velocity:")
+    print_i += 1
+    print_at(1, print_i, f"X: {velocity[0]}")
+    print_i += 1
+    print_at(1, print_i, f"Y: {velocity[1]}")
+    print_i += 1
+    print_at(1, print_i, f"Z: {velocity[2]}")
+    print_i += 1

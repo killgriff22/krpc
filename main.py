@@ -55,9 +55,6 @@ parachute_flag_a = False
 while True:
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
-    #x,y,z = [float(a) for a in vel]
-    print('Surface velocity = (%.1f, %.1f, %.1f)' % velocity)
-    print(f'Altitude: {altitude()}')
     if alt < 2000:
         parachute_flag_b = False
         if not parachute_flag_b:

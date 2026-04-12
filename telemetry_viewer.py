@@ -38,7 +38,7 @@ while True:
     print_i += 1
     print_at(1, print_i, f"Z: {velocity[2]}")
     print_i += 1
-    print_at(1, print_i, f"Time to Surface: {alt/(velocity[0]+1)}")
+    print_at(1, print_i, f"Time to Surface: {alt/(abs(velocity[0])+1)}")
     print_i += 1
 
     print_i = 30

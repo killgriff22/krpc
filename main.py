@@ -1,6 +1,6 @@
 import krpc
 import time
-conn = krpc.connect(name='Hello World')
+conn = krpc.connect(name='Ascent Guidance', address="192.168.1.191")
 vessel = conn.space_center.active_vessel
 control = vessel.control
 control.brakes = False

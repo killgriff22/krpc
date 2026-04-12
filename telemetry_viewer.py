@@ -26,4 +26,7 @@ while True:
     if dt > 1:
         pass#reports = request_reports()
     print_at(1, 1, f"Altitude: {alt} Apoapsis: {apo} Vel: {velocity}")
-    #print_at(1, 2, f"")
+    print_at(1, 2, f"Velocity:")
+    print_at(1, 3, f"X: {velocity[0]}")
+    print_at(1, 4, f"Y: {velocity[1]}")
+    print_at(1, 5, f"Z: {velocity[2]}")

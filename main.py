@@ -60,7 +60,7 @@ while True:
         if not parachute_flag_b:
             vessel.control.toggle_action_group(1)
             parachute_flag_b = True
-    if alt < 1000:
+    if alt < 1000 and False: # BAD.
         if not parachute_flag_a:
             vessel.control.toggle_action_group(3)
             parachute_flag_a = True

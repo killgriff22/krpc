@@ -1,3 +1,5 @@
 rocketimgx = 60
 rocketimgy = 20
-extra_info = "       "
+time_to_next_pull = round(10-dt)
+time_to_next_report_pull = round(1-(dt % 1))
+extra_info = f" TTP:{time_to_next_pull} TTR:{time_to_next_report_pull}"

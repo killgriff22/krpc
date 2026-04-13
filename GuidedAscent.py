@@ -9,8 +9,8 @@ FLIGHT_PROFILE = {
     "Return Descent": True,
     "Carrying Payload": False,
     "Payload Drop Height": 50000,
-    "Landed Margin Alt": 20,
-    "Landed Margin": 10,
+    "Landed Margin Alt": 10,
+    "Landed Margin": 5,
 }
 conn = krpc.connect(name='Ascent Guidance', address=KRPC_SERVER)
 spc = conn.space_center

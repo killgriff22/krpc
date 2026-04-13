@@ -55,6 +55,9 @@ while True:
     apo = apoapsis()
     if dt_1 >= 10:
         t_1 = _t
+        move_cursor(0, 0)
+        print("                   ")
+        move_cursor(0, 0)
         os.system("git pull")
         continue
     if dt_2 > 1:

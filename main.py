@@ -8,7 +8,12 @@ control = vessel.control
 control.brakes = False
 control.rcs = True
 control.sas = True
-report_message(vessel.name)
+report_Profile(vessel.name, {
+    f"Target Alt": 4000,
+    f"Orbit Burn": False,
+    f"Return Descent": True,
+    f"Carrying Payload": False,
+})
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
@@ -36,7 +41,7 @@ time.sleep(2)
 report_message('Secondary parachute deployment')
 vessel.control.toggle_action_group(2)
 
-time.sleep(5)
+time.sleep(10)
 report_message('Faring separation')
 vessel.control.activate_next_stage()
 report_message('Retrograde')
@@ -51,6 +56,7 @@ ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
     rotation=vessel.surface_reference_frame)
 parachute_flag_b = False
 parachute_flag_a = False
+report_message("begin control loop")
 while True:
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()

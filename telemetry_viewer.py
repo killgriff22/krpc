@@ -17,7 +17,7 @@ ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
 clear()
-reports = {}
+reports = []
 t = time.time()
 ns = time.time_ns()
 _ns = time.time_ns()
@@ -37,8 +37,12 @@ while True:
     if dt > 1:
         t = _t
         reports = request_reports()['data']
+        while len(reports) > 30:
+            reports.pop(0)
         brk = False
         if len(reports) == 0:
+            clear()
+            continue
             brk = True
         if not brk:
             if "Flight Profile" in reports[0].keys():

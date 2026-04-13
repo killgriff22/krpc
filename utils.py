@@ -13,6 +13,11 @@ def report_message(msg):
                   "message": msg, "timestamp": time.time()})
 
 
+def report_Profile(msg, fp):
+    requests.post(REPORTER_ADDR, json={
+                  "message": msg, "timestamp": time.time(), "Flight Profile": fp})
+
+
 def request_reports():
     resp = requests.post(REPORTER_ADDR)
     return resp.json()

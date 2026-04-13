@@ -37,7 +37,7 @@ while True:
     apo = apoapsis()
     if dt > 1:
         clear()
-        pass  # reports = request_reports()
+        reports = request_reports()
         if "Flight Profile" in reports[0].keys():
             flight_profile = reports[0]['Flight Profile']
     print_i = 1

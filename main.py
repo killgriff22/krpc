@@ -14,6 +14,7 @@ report_Profile(vessel.name, {
     f"Return Descent": True,
     f"Carrying Payload": False,
 })
+input("Flight Plan sent! await ready to launch!")
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')

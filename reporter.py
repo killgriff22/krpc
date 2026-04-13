@@ -1,17 +1,26 @@
 import flask
 import random
 import json
+import os
 
 app = flask.Flask(__name__)
 _id = random.random()*9999
-a = open(f"log-{_id}", "w")
-a.write("")
-a.close()
+
+
+def o():
+    a = open(f"log-{_id}", "w")
+    a.write("")
+    a.close()
+
+
+o()
 
 
 @app.route("/", methods=["POST"])
 def root():
     print(flask.request.get_data())
+    if not os.path.exists(f"log-{_id}"):
+        o()
     if flask.request.data:
         d = json.loads(flask.request.data)
         f = open(f"log-{_id}", "a")

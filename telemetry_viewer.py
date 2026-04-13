@@ -27,7 +27,7 @@ flight_profile = {
     f"Return Descent": False,
     f"Carrying Payload": False,
 }
-
+plan_recived = False
 while True:
     _t = time.time()
     dt = _t-t
@@ -44,9 +44,11 @@ while True:
             clear()
             continue
             brk = True
-        if not brk:
+        if not brk and not plan_recived:
             if "Flight Profile" in reports[0].keys():
                 flight_profile = reports[0]['Flight Profile']
+                clear()
+                plan_recived = True
     print_i = 1
     print_at(1, print_i, f"frametime {(_ns-ns)/1000000000}")
     print_i += 1

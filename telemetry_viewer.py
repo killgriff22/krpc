@@ -23,6 +23,9 @@ _ns = time.time_ns()
 flight_profile = {}
 plan_recived = False
 lastcontent = ""
+extra_info = ""
+rocketimgx = 40
+rocketimgy = 20
 while True:
     _t = time.time()
     dt = _t-t
@@ -47,7 +50,8 @@ while True:
                 clear()
                 plan_recived = True
     print_i = 1
-    print_at(1, print_i, f"frametime {(_ns-ns)/1000000000}")
+    print_at(
+        1, print_i, f"frametime {round((_ns-ns)/1000000000)} {extra_info}")
     print_i += 1
     print_at(
         1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}            ")
@@ -84,7 +88,7 @@ while True:
     print_i += 1
     for i, log in enumerate(reports):
         print_at(0, print_i+i, log['message'])
-    print_at_mult(40, 20, """
+    print_at_mult(rocketimgx, rocketimgy, """
          /\\
         /  \\
        /    \\

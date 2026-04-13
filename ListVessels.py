@@ -59,7 +59,7 @@ while True:
         t = _t
         clear()
     print_i = 1
-    print_at(1, print_i, f"frametime {(_ns-ns)/1000000000}")
+    print_at(1, print_i, f"frametime {round((_ns-ns)/1000000000)}")
     print_i += 1
     print_at(
         1, print_i, f"Active Vessel: {""}")

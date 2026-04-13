@@ -72,14 +72,11 @@ if altitude() > 10000:
 report_message('Secondary parachute deployment')
 vessel.control.toggle_action_group(2)
 
+if FLIGHT_PROFILE['Carrying Payload']:
+    input("await user to circularize payload!\nPress enter when ready!")
 
-input("await user to circularize payload!\nPress enter when ready!")
-
-while altitude() > 10000:
-    pass
-
-report_message('Fold Ablatives')
-control.toggle_action_group(4)
+    while altitude() > 10000:
+        pass
 
 
 report_message('Retrograde')

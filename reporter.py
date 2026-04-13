@@ -18,7 +18,6 @@ o()
 
 @app.route("/", methods=["POST"])
 def root():
-    print(flask.request.get_data())
     if not os.path.exists(f"log-{_id}"):
         o()
     if flask.request.data:
@@ -32,7 +31,6 @@ def root():
         lines = f.read().split("\n")
         data = []
         for l in lines:
-            print(l)
             if l == "":
                 continue
             data.append(json.loads(l))

@@ -1,19 +1,20 @@
 import krpc
 import time
 from utils import *
-
+FLIGHT_PROFILE = {
+    f"Target Alt": 40000,
+    f"Descent Alt": 2000,
+    f"Orbit Burn": False,
+    f"Return Descent": True,
+    f"Carrying Payload": False,
+}
 conn = krpc.connect(name='Ascent Guidance', address=KRPC_SERVER)
 vessel = conn.space_center.active_vessel
 control = vessel.control
 control.brakes = False
 control.rcs = True
 control.sas = True
-report_Profile(vessel.name, {
-    f"Target Alt": 4000,
-    f"Orbit Burn": False,
-    f"Return Descent": True,
-    f"Carrying Payload": False,
-})
+report_Profile(vessel.name, FLIGHT_PROFILE)
 input("Flight Plan sent! await ready to launch!")
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
@@ -24,15 +25,12 @@ vessel.auto_pilot.engage()
 vessel.control.throttle = 1
 time.sleep(1)
 report_message('Launch!')
-vessel.control.activate_next_stage()
-
-mean_altitude = conn.get_call(getattr, vessel.flight(), 'mean_altitude')
-expr = conn.krpc.Expression.greater_than(
-    conn.krpc.Expression.call(mean_altitude),
-    conn.krpc.Expression.constant_double(4000))
-event = conn.krpc.add_event(expr)
-with event.condition:
-    event.wait()
+# vessel.control.activate_next_stage()
+while altitude() < 1000:
+    pass
+control.gear = False
+while apoapsis() < FLIGHT_PROFILE['Descent Alt']:
+    pass
 
 
 report_message('Throttle Back')
@@ -58,29 +56,32 @@ ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
 parachute_flag_b = False
 parachute_flag_a = False
 report_message("begin control loop")
-while True:
+while FLIGHT_PROFILE["Return Descent"]:
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
-    if alt < 2000:
-        parachute_flag_b = False
+    if alt < FLIGHT_PROFILE['Descent Alt']:
         if not parachute_flag_b:
             report_message('Pop Primary Parachute')
             vessel.control.toggle_action_group(1)
+            control.gear = True
             parachute_flag_b = True
-    if alt < 2000 and velocity[0] < -30:
-        report_message('half descent burn half')
-        throttle = .4
-    if alt < 2000 and velocity[0] < -160:
-        report_message('max descent burn max')
-        throttle = 1
-    if alt < 2000 and velocity[0] > 0:
-        report_message('cut descent burn cut')
-        throttle = 0
-    if alt < 1000 and False:  # BAD.
-        if not parachute_flag_a:
-            vessel.control.toggle_action_group(3)
-            parachute_flag_a = True
-    if velocity[0] < 0:
-        VerticalVel = abs(velocity[0])
+    if alt < FLIGHT_PROFILE['Descent Alt'] and velocity[0] < -60:
+        report_message('half descent burn half      ')
+        control.throttle = .4
+    if alt < 500 and velocity[0] < -15:
+        report_message('half descent burn half      ')
+        control.throttle = .4
+    if alt < FLIGHT_PROFILE['Descent Alt'] and velocity[0] < -160:
+        report_message('max descent burn max        ')
+        control.throttle = 1
+    if alt < FLIGHT_PROFILE['Descent Alt'] and alt > 500 and velocity[0] > -30:
+        report_message('cut descent burn cut        ')
+        control.throttle = 0
+    if alt < FLIGHT_PROFILE['Descent Alt'] and alt < 500 and velocity[0] < -10:
+        report_message('quarter descent burn quarter')
+        control.throttle = .4
+    if alt < FLIGHT_PROFILE['Descent Alt'] and alt < 500 and velocity[0] > -2:
+        report_message('cut descent burn cut        ')
+        control.throttle = 0
 
 ap.disengage()

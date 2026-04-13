@@ -40,3 +40,6 @@ print_i += 1
 for i, k in enumerate(list(flight_profile.keys())):
     print_at(1, i+print_i, f"{k}: {flight_profile[k]}")
 print_i += len(list(flight_profile.keys()))
+
+if control.sas:
+    print_i =

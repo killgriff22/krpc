@@ -42,12 +42,24 @@ for i, k in enumerate(list(flight_profile.keys())):
 print_i += len(list(flight_profile.keys()))
 
 rocketimg = rocketimg.split("\n")
+line_i = 0
 if control.sas:
-    rocketimg[0] = r"SAS              "
+    rocketimg[line_i] = r"SAS"
 else:
-    rocketimg[0] = r"                 "
+    rocketimg[line_i] = r"   "
+rocketimg[line_i] += "              "
 if control.rcs:
-    rocketimg[0] += "RCS"
+    rocketimg[line_i] += "RCS"
 else:
-    rocketimg[0] += "   "
+    rocketimg[line_i] += "   "
+line_i = 0
+if control.gear:
+    rocketimg[line_i] = r"GEAR"
+else:
+    rocketimg[line_i] = r"    "
+rocketimg[line_i] += "           "
+if control.brakes:
+    rocketimg[line_i] += "BRAKE"
+else:
+    rocketimg[line_i] += "     "
 rocketimg = "\n".join(rocketimg)

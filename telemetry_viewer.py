@@ -1,5 +1,5 @@
 import krpc
-import time
+import time, math
 from utils import *
 KRPC_SERVER = "192.168.1.191"
 REPORTER_SERVER = KRPC_SERVER
@@ -26,11 +26,15 @@ while True:
     if dt > 1:
         pass#reports = request_reports()
     print_i = 1
-    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs}, Throttle: {control.throttle}")
+    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {math.round(control.throttle*100)/100}")
+    print_i += 1
+    print_at(1, print_i, f"Brakes: {control.brakes} Gear: {control.gear} Antennas: {control.antennas} Cargo Bays: {control.cargo_bays} Lights: {control.lights}")
+    print_i += 1
+    print_at(1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Antennas: {control.antennas} Cargo Bays: {control.cargo_bays} Lights: {control.lights}")
     print_i += 1
     print_at(1, print_i, f"Altitude: {alt} Apoapsis: {apo}")
     print_i += 1
-    print_at(1, print_i, f"Velocity:")
+    print_at(1, print_i, f"Velocity, RPH:")
     print_i += 1
     print_at(1, print_i, f"X: {velocity[0]}")
     print_i += 1
@@ -39,6 +43,12 @@ while True:
     print_at(1, print_i, f"Z: {velocity[2]}")
     print_i += 1
     print_at(1, print_i, f"Time to Surface: {alt/(abs(velocity[0])+1)}")
+    print_i += 1
+    print_at(1, print_i, f"Flight Profile:")
+    print_i += 1
+    print_at(1, print_i, f"Target Alt: {0}")
+    print_i += 1
+    print_at(1, print_i, f"Orbit Burn: {False}")
     print_i += 1
 
     print_i = 30

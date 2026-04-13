@@ -91,7 +91,7 @@ while True:
     print_at(1, print_i, f"Flight Log:")
     print_i += 1
     for i, log in enumerate(reports):
-        print_at(0, print_i+i, log['message'])
+        print_at(0, print_i+i, log['message'][:40])
     print_at_mult(rocketimgx, rocketimgy, """
          /\\
         /  \\

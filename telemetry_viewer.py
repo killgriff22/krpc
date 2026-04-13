@@ -2,7 +2,6 @@ import krpc
 import time
 import math
 from utils import *
-print(request_reports())
 
 # exit()
 

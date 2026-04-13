@@ -38,8 +38,11 @@ while True:
         t = _t
         clear()
         reports = request_reports()['data']
-        if "Flight Profile" in reports[0].keys():
-            flight_profile = reports[0]['Flight Profile']
+        if len(reports) == 0:
+            brk = True
+        if not brk:
+            if "Flight Profile" in reports[0].keys():
+                flight_profile = reports[0]['Flight Profile']
     print_i = 1
     print_at(1, print_i, f"frametime {(_ns-ns)/1000000000}")
     print_i += 1

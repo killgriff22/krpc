@@ -46,6 +46,6 @@ if control.sas:
 else:
     print_at(60, 20, "   ")
 if control.rcs:
-    print_at(73, 20, "RCS")
+    print_at(83, 20, "RCS")
 else:
-    print_at(73, 20, "   ")
+    print_at(83, 20, "   ")

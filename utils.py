@@ -31,6 +31,12 @@ def request_reports():
     return resp.json()
 
 
+def move_cursor(row, col):
+    # ANSI sequence to move cursor to (row, col)
+    sys.stdout.write(f"\x1B[{row};{col}H")
+    sys.stdout.flush()
+
+
 def print_at(x, y, s):
     screensize = os.get_terminal_size().columns
     s = (s+(" "*screensize))[:screensize]

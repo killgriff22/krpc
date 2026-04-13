@@ -4,7 +4,7 @@ import math
 from utils import *
 print(request_reports())
 
-exit()
+# exit()
 
 conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
 vessel = conn.space_center.active_vessel
@@ -37,7 +37,7 @@ while True:
     apo = apoapsis()
     if dt > 1:
         clear()
-        reports = request_reports()
+        reports = request_reports()['data']
         if "Flight Profile" in reports[0].keys():
             flight_profile = reports[0]['Flight Profile']
     print_i = 1

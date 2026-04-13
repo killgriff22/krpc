@@ -34,7 +34,6 @@ while True:
     velocity = [1, 1, 1]
     alt = altitude()
     apo = apoapsis()
-    clear()
     if dt > 1:
         t = _t
         reports = request_reports()['data']

@@ -52,7 +52,7 @@ if control.rcs:
     rocketimg[line_i] += "RCS"
 else:
     rocketimg[line_i] += "   "
-line_i = 0
+line_i = 18
 if control.gear:
     rocketimg[line_i] = r"GEAR"
 else:

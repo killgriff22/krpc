@@ -1,6 +1,6 @@
 import krpc
 import time
-from utils import  *
+from utils import *
 
 conn = krpc.connect(name='Ascent Guidance', address=KRPC_SERVER)
 vessel = conn.space_center.active_vessel
@@ -9,7 +9,6 @@ control.brakes = False
 control.rcs = True
 control.sas = True
 report_message(vessel.name)
-exit()
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
@@ -43,7 +42,7 @@ vessel.control.activate_next_stage()
 report_message('Retrograde')
 # Point the vessel in the retrograde direction
 ap.target_direction = (0, -1, 0)
-#ap.wait()
+# ap.wait()
 report_message('Brakes')
 control.brakes = True
 
@@ -60,11 +59,11 @@ while True:
         if not parachute_flag_b:
             vessel.control.toggle_action_group(1)
             parachute_flag_b = True
-    if alt < 1000 and False: # BAD.
+    if alt < 1000 and False:  # BAD.
         if not parachute_flag_a:
             vessel.control.toggle_action_group(3)
             parachute_flag_a = True
     if velocity[0] < 0:
         VerticalVel = abs(velocity[0])
-    
+
 ap.disengage()

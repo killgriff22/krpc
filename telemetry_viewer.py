@@ -31,11 +31,11 @@ flight_profile = {
 while True:
     _t = time.time()
     dt = _t-t
-    t = _t
     velocity = [1, 1, 1]
     alt = altitude()
     apo = apoapsis()
     if dt > 1:
+        t = _t
         clear()
         reports = request_reports()['data']
         if "Flight Profile" in reports[0].keys():

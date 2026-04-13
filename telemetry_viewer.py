@@ -81,7 +81,7 @@ while True:
     print_i += 1
     for i, log in enumerate(reports):
         print_at(0, print_i+i, log['message'])
-    print_at_mult(20, 20, """
+    print_at_mult(40, 20, """
          /\\
         /  \\
        /    \\

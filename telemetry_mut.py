@@ -33,7 +33,7 @@ print_at(
     1, print_i, f"Z: {round(velocity[2])}     H: {round(control.yaw)}")
 print_i += 1
 print_at(
-    1, print_i, f"Time to Surface: {alt/(abs(velocity[0])+1)}")
+    1, print_i, f"Time to Surface: {round(alt/(abs(velocity[0])+1))}")
 print_i += 1
 print_at(1, print_i, f"Flight Profile:")
 print_i += 1

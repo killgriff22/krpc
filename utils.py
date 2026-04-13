@@ -9,6 +9,13 @@ REPORTER_ADDR = f"http://{KRPC_SERVER}:{REPORTER_PORT}/"
 DEBUG = False
 
 
+def round(num, places=2):
+    s = str(num).split(".")
+    if len(s) == 1:
+        return num
+    return float(s[0]+"." + s[1][:2])
+
+
 def report_message(msg):
     requests.post(REPORTER_ADDR, json={
                   "message": msg, "timestamp": time.time()})

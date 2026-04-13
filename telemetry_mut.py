@@ -19,7 +19,7 @@ print_at(
 print_i += 1
 print_at(1, print_i, f"Stage: {control.current_stage}")
 print_i += 1
-print_at(1, print_i, f"Altitude: {round(alt)} Apoapsis: {round(apo)}")
+print_at(1, print_i, f"Altitude: {round(alt)} Apoapsis: {round(apoapsis())}")
 print_i += 1
 print_at(1, print_i, f"Velocity, RPH:")
 print_i += 1

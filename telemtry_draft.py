@@ -1,21 +1,43 @@
-import krpc
-import time, math
 from utils import *
-KRPC_SERVER = "192.168.1.191"
-REPORTER_SERVER = KRPC_SERVER
-REPORTER_PORT = 86001
-conn = krpc.connect(name='Telemetry',address=KRPC_SERVER)
-vessel = conn.space_center.active_vessel
-control = vessel.control
-print(vessel.name)
-ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
-    position=vessel.orbit.body.reference_frame,
-    rotation=vessel.surface_reference_frame)
-ut = conn.add_stream(getattr, conn.space_center, 'ut')
-altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
-apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
+import random, math
 clear()
-reports = {}
+def altitude():
+    return random.random()*1000
+def apoapsis():
+    return random.random()*1000
+def round(num,places=2):
+    s = str(num).split(".")
+    if len(s) == 1:
+        return num
+    return float(s[0]+"."+ s[1][:2])
+class vessel:
+    name = "NoShip"
+class control:
+    sas = False
+    rcs = False
+    throttle = .55555
+    antennas = False
+    radiators = False
+    gear = False
+    brakes = False
+    cargo_bays = False
+    solar_panels = False
+    lights = False
+    current_stage = 1
+    roll = 0
+    yaw = 0
+    pitch = 0
+reports = [
+    {"message":"Launch!", "Flight Profile":{
+        f"Target Alt" : 4000,
+        f"Orbit Burn": False,
+        f"Return Descent": True,
+        f"Carrying Payload": False,
+        }
+    },
+    {"message":"next question"},
+    {"message":"stage!"},
+]
 t = time.time()
 ns = time.time_ns()
 _ns = time.time_ns()
@@ -45,7 +67,7 @@ while True:
     print_i += 1
     print_at(1, print_i, f"Brakes: {control.brakes} Gear: {control.gear} Antennas: {control.antennas} Cargo Bays: {control.cargo_bays} Lights: {control.lights}")
     print_i += 1
-    print_at(1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Antennas: {control.antennas} Stage: {control.current_stage} Abort: {control.abort}")
+    print_at(1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Antennas: {control.antennas} Stage: {control.current_stage} Lights: {control.lights}")
     print_i += 1
     print_at(1, print_i, f"Stage: {control.current_stage} ")
     print_i += 1

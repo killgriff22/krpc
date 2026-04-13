@@ -33,7 +33,7 @@ def request_reports():
 
 def print_at(x, y, s):
     screensize = os.get_terminal_size().columns
-    s = s+(" "*screensize)[:screensize]
+    s = s+(" "*screensize)[:screensize-1]
     sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (y, x, s))
     sys.stdout.flush()
 

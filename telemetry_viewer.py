@@ -31,12 +31,13 @@ flight_profile = {
 while True:
     _t = time.time()
     dt = _t-t
-    velocity = [1, 1, 1]
+    velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
     apo = apoapsis()
     if dt > 1:
         t = _t
         reports = request_reports()['data']
+        brk = False
         if len(reports) == 0:
             brk = True
         if not brk:

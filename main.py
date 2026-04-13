@@ -57,8 +57,18 @@ while True:
     if alt < 2000:
         parachute_flag_b = False
         if not parachute_flag_b:
+            report_message('Pop Primary Parachute')
             vessel.control.toggle_action_group(1)
             parachute_flag_b = True
+    if alt < 2000 and velocity[0] < -30:
+        report_message('half descent burn half')
+        throttle = .4
+    if alt < 2000 and velocity[0] < -160:
+        report_message('max descent burn max')
+        throttle = 1
+    if alt < 2000 and velocity[0] > 0:
+        report_message('cut descent burn cut')
+        throttle = 0
     if alt < 1000 and False:  # BAD.
         if not parachute_flag_a:
             vessel.control.toggle_action_group(3)

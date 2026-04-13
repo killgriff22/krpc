@@ -1,10 +1,12 @@
 import krpc
-import time, math
+import time
+import math
 from utils import *
-KRPC_SERVER = "192.168.1.191"
-REPORTER_SERVER = KRPC_SERVER
-REPORTER_PORT = 86001
-conn = krpc.connect(name='Telemetry',address=KRPC_SERVER)
+print(request_reports())
+
+exit()
+
+conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
 vessel = conn.space_center.active_vessel
 control = vessel.control
 print(vessel.name)
@@ -20,7 +22,7 @@ t = time.time()
 ns = time.time_ns()
 _ns = time.time_ns()
 flight_profile = {
-    f"Target Alt" : 0,
+    f"Target Alt": 0,
     f"Orbit Burn": False,
     f"Return Descent": False,
     f"Carrying Payload": False,
@@ -29,23 +31,26 @@ flight_profile = {
 while True:
     _t = time.time()
     dt = _t-t
-    t=_t
-    velocity = [1,1,1]
+    t = _t
+    velocity = [1, 1, 1]
     alt = altitude()
     apo = apoapsis()
     if dt > 1:
         clear()
-        pass#reports = request_reports()
+        pass  # reports = request_reports()
         if "Flight Profile" in reports[0].keys():
             flight_profile = reports[0]['Flight Profile']
     print_i = 1
     print_at(1, print_i, f"frametime {(_ns-ns)/1000000000}")
     print_i += 1
-    print_at(1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}")
+    print_at(
+        1, print_i, f"Vessel: {vessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}")
     print_i += 1
-    print_at(1, print_i, f"Brakes: {control.brakes} Gear: {control.gear} Antennas: {control.antennas} Cargo Bays: {control.cargo_bays} Lights: {control.lights}")
+    print_at(
+        1, print_i, f"Brakes: {control.brakes} Gear: {control.gear} Antennas: {control.antennas} Cargo Bays: {control.cargo_bays} Lights: {control.lights}")
     print_i += 1
-    print_at(1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Antennas: {control.antennas} Stage: {control.current_stage} Abort: {control.abort}")
+    print_at(
+        1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Antennas: {control.antennas} Stage: {control.current_stage} Abort: {control.abort}")
     print_i += 1
     print_at(1, print_i, f"Stage: {control.current_stage} ")
     print_i += 1
@@ -63,14 +68,14 @@ while True:
     print_i += 1
     print_at(1, print_i, f"Flight Profile:")
     print_i += 1
-    for i,k in enumerate(list(flight_profile.keys())):
+    for i, k in enumerate(list(flight_profile.keys())):
         print_at(1, i+print_i, f"{k}: {flight_profile[k]}")
     print_i += len(list(flight_profile.keys()))
     print_i = 30
     print_at(1, print_i, f"Flight Log:")
     print_i += 1
     for i, log in enumerate(reports):
-        print_at(0,print_i+i, log['message'])
+        print_at(0, print_i+i, log['message'])
     print_at_mult(200, 20, """
          /\\
         /  \\
@@ -90,5 +95,5 @@ while True:
       \      /
        ||  ||
 """)
-    ns=_ns
+    ns = _ns
     _ns = time.time_ns()

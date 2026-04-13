@@ -1,20 +1,34 @@
 import requests
-import time, sys
+import time
+import sys
 import os
-def report_message(addr, msg):
-    requests.post(addr, {"message":msg, "timestamp": time.time()})
+KRPC_SERVER = "192.168.1.191"
+REPORTER_SERVER = KRPC_SERVER
+REPORTER_PORT = 8601
+REPORTER_ADDR = f"http://{KRPC_SERVER}:{REPORTER_PORT}/"
 
-def request_reports(addr):
-    resp = requests.post(addr)
-    return resp.json() 
 
-def print_at(x,y,s):
-    sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % ( y, x, s))
+def report_message(msg):
+    requests.post(REPORTER_ADDR, json={
+                  "message": msg, "timestamp": time.time()})
+
+
+def request_reports():
+    resp = requests.post(REPORTER_ADDR)
+    return resp.json()
+
+
+def print_at(x, y, s):
+    sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (y, x, s))
     sys.stdout.flush()
-def print_at_mult(x,y,s):
+
+
+def print_at_mult(x, y, s):
     ss = s.split("\n")
-    for i,_s in enumerate(ss):
-        sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % ( y+i, x, _s))
+    for i, _s in enumerate(ss):
+        sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (y+i, x, _s))
         sys.stdout.flush()
+
+
 def clear():
     os.system("clear")

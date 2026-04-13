@@ -1,15 +1,15 @@
 import krpc
 import time
+from utils import  *
 
-message_reporter_address = "192.168.1.199"
-
-conn = krpc.connect(name='Ascent Guidance', address="192.168.1.191")
+conn = krpc.connect(name='Ascent Guidance', address=KRPC_SERVER)
 vessel = conn.space_center.active_vessel
 control = vessel.control
 control.brakes = False
 control.rcs = True
 control.sas = True
-print(vessel.name)
+report_message(vessel.name)
+exit()
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
 altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
@@ -18,7 +18,7 @@ ap.reference_frame = vessel.surface_velocity_reference_frame
 vessel.auto_pilot.engage()
 vessel.control.throttle = 1
 time.sleep(1)
-print('Launch!')
+report_message('Launch!')
 vessel.control.activate_next_stage()
 
 mean_altitude = conn.get_call(getattr, vessel.flight(), 'mean_altitude')
@@ -30,21 +30,21 @@ with event.condition:
     event.wait()
 
 
-print('Throttle Back')
+report_message('Throttle Back')
 vessel.control.throttle = 0
 time.sleep(2)
 
-print('Secondary parachute deployment')
+report_message('Secondary parachute deployment')
 vessel.control.toggle_action_group(2)
 
 time.sleep(5)
-print('Faring separation')
+report_message('Faring separation')
 vessel.control.activate_next_stage()
-print('Retrograde')
+report_message('Retrograde')
 # Point the vessel in the retrograde direction
 ap.target_direction = (0, -1, 0)
 #ap.wait()
-print('Brakes')
+report_message('Brakes')
 control.brakes = True
 
 ref_frame = conn.space_center.ReferenceFrame.create_hybrid(

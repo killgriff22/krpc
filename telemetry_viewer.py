@@ -21,12 +21,7 @@ reports = []
 t = time.time()
 ns = time.time_ns()
 _ns = time.time_ns()
-flight_profile = {
-    f"Target Alt": 0,
-    f"Orbit Burn": False,
-    f"Return Descent": False,
-    f"Carrying Payload": False,
-}
+flight_profile = {}
 plan_recived = False
 while True:
     _t = time.time()

@@ -42,4 +42,4 @@ for i, k in enumerate(list(flight_profile.keys())):
 print_i += len(list(flight_profile.keys()))
 
 if control.sas:
-    print_i =
+    print_i = 1

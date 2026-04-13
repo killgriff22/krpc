@@ -18,7 +18,7 @@ control.sas = True
 report_Profile(vessel.name, FLIGHT_PROFILE)
 input("Flight Plan sent! await ready to launch!")
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
-altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
+altitude = conn.add_stream(getattr, vessel.flight(), 'surface_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
 ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
     position=vessel.orbit.body.reference_frame,

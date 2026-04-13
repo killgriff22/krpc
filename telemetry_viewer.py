@@ -13,7 +13,7 @@ ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
     position=vessel.orbit.body.reference_frame,
     rotation=vessel.surface_reference_frame)
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
-altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
+altitude = conn.add_stream(getattr, vessel.flight(), 'surface_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
 clear()
 reports = []

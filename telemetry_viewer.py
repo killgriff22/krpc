@@ -35,6 +35,7 @@ while True:
     if dt >= 10:
         t = _t
         os.system("git pull")
+        continue
     if dt > 1:
         reports = request_reports()['data']
         while len(reports) > 16:

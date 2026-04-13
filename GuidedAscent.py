@@ -3,12 +3,12 @@ import time
 import random
 from utils import *
 FLIGHT_PROFILE = {
-    "Target Apo": 4000,
-    "Descent Alt": 2000,
+    "Target Apo": 4_000,
+    "Descent Alt": 2_000,
     "Orbit Burn": False,
     "Return Descent": True,
     "Carrying Payload": False,
-    "Payload Drop Height": 50000,
+    "Payload Drop Height": 90_000,
     "Landed Margin Alt": 10,
     "Landed Margin": 5,
 }

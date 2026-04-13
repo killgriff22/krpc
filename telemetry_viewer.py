@@ -6,6 +6,7 @@ from utils import *
 # exit()
 
 conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
+report_Profile("Telemetry Profile", {"None": "None"})
 vessel = conn.space_center.active_vessel
 control = vessel.control
 print(vessel.name)

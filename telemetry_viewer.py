@@ -34,7 +34,6 @@ while True:
     apo = apoapsis()
     if dt >= 10:
         t = _t
-        clear()
         os.system("git pull")
         continue
     if dt % 1 > 1:

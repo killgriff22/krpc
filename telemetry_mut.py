@@ -42,6 +42,27 @@ for i, k in enumerate(list(flight_profile.keys())):
 print_i += len(list(flight_profile.keys()))
 
 rocketimg = rocketimg.split("\n")
+r"""
+|SAS       |       RCS|
+|         /|\         |
+|        / | \        |
+|       /  |  \       |
+|      /___|___\      |
+|     |    |    |     |
+|     |    |    |     |
+|     |    |    |     |
+|     |    |    |     |
+|     |    |    |     |
+|     |    |    |     |
+|    /|   |||   |\    |
+|   / |   |||   | \   |
+|  /  |   |||   |  \  |
+| /___|   |||   |___\ |
+|     |    |    |     |
+|      \   |   /      |
+|       || | ||       |
+|GEAR     |||    BRAKE|
+"""
 line_i = 0
 if control.sas:
     rocketimg[line_i] = r"SAS"
@@ -57,7 +78,20 @@ if control.gear:
     rocketimg[line_i] = r"GEAR"
 else:
     rocketimg[line_i] = r"    "
-rocketimg[line_i] += "           "
+rocketimg[line_i] += "     "
+t = control.throttle
+c = "x"
+if t < .1:
+    c = "x"
+if t > .25:
+    c = "-"
+if t > .5:
+    c = "="
+if t > .9:
+    c = "|"
+rocketimg[line_i] += c+c
+rocketimg[line_i] += "    "
+
 if control.brakes:
     rocketimg[line_i] += "BRAKE"
 else:

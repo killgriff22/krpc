@@ -34,7 +34,7 @@ while True:
         os.system("git pull")
     if dt > 1:
         reports = request_reports()['data']
-        while len(reports) > 30:
+        while len(reports) > 16:
             reports.pop(0)
         brk = False
         if len(reports) == 0:

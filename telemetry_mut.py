@@ -42,10 +42,10 @@ for i, k in enumerate(list(flight_profile.keys())):
 print_i += len(list(flight_profile.keys()))
 
 if control.sas:
-    print_at(60, 40, "SAS")
+    print_at(60, 20, "SAS")
 else:
-    print_at(60, 40, "   ")
+    print_at(60, 20, "   ")
 if control.rcs:
-    print_at(93, 40, "RCS")
+    print_at(93, 20, "RCS")
 else:
-    print_at(93, 40, "   ")
+    print_at(93, 20, "   ")

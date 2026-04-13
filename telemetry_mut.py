@@ -43,11 +43,11 @@ print_i += len(list(flight_profile.keys()))
 
 rocketimg = rocketimg.split("\n")
 if control.sas:
-    rocketimg[0] = r"SAS               "
+    rocketimg[0] = r"SAS             "
 else:
-    rocketimg[0] = r"                  "
+    rocketimg[0] = r"                "
 if control.rcs:
     rocketimg[0] += "RCS"
 else:
-    rocketimg[0] += "   "
+    rocketimg[0] += ""
 rocketimg = "\n".join(rocketimg)

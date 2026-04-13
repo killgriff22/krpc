@@ -1,5 +1,6 @@
 import krpc
 import time
+import random
 from utils import *
 FLIGHT_PROFILE = {
     "Target Apo": 4000,
@@ -8,8 +9,11 @@ FLIGHT_PROFILE = {
     "Return Descent": True,
     "Carrying Payload": False,
     "Payload Drop Height": 50000,
+    "Landed Margin Alt": 50,
+    "Landed Margin": 50,
 }
 conn = krpc.connect(name='Ascent Guidance', address=KRPC_SERVER)
+spc = conn.space_center
 vessel = conn.space_center.active_vessel
 control = vessel.control
 control.brakes = False
@@ -167,5 +171,10 @@ while FLIGHT_PROFILE["Return Descent"]:
         if not msg6:
             report_message('cut descent burn cut        ')
         control.throttle = 0
+    if abs(altitude()-FLIGHT_PROFILE['Landed Margin Alt']) < FLIGHT_PROFILE['Landed Margin']:
+        break
+time.sleep(10)
+spc.screenshot(f"{random.randint(1000, 9999)}.png")
+spc.quickload()
 
-ap.disengage()
+exit()

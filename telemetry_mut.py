@@ -41,11 +41,13 @@ for i, k in enumerate(list(flight_profile.keys())):
     print_at(1, i+print_i, f"{k}: {flight_profile[k]}")
 print_i += len(list(flight_profile.keys()))
 
+rocketimg = rocketimg.split("\n")
 if control.sas:
-    print_at(60, 20, "SAS")
+    rocketimg[0] = r"SAS       /\      "
 else:
-    print_at(60, 20, "   ")
+    rocketimg[0] = r"          /\      "
 if control.rcs:
-    print_at(77, 20, "RCS")
+    rocketimg[0] += "RCS"
 else:
-    print_at(77, 20, "   ")
+    rocketimg[0] += "   "
+rocketimg = "\n".join(rocketimg)

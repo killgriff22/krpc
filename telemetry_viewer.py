@@ -22,14 +22,17 @@ ns = time.time_ns()
 _ns = time.time_ns()
 flight_profile = {}
 plan_recived = False
+lastcontent = ""
 while True:
     _t = time.time()
     dt = _t-t
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
     apo = apoapsis()
-    if dt > 1:
+    if dt >= 10:
         t = _t
+        os.system("git pull")
+    if dt > 1:
         reports = request_reports()['data']
         while len(reports) > 30:
             reports.pop(0)
@@ -100,5 +103,10 @@ while True:
       \      /
        ||  ||
 """)
+    content = open("telemetry_mut.py", "r").read()
+    if not content == lastcontent:
+        lastcontent = content
+        clear()
+    exec(compile(f"{content}", "bleh.py", "exec"))
     ns = _ns
     _ns = time.time_ns()

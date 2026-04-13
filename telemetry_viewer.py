@@ -27,6 +27,25 @@ lastcontent = ""
 extra_info = ""
 rocketimgx = 40
 rocketimgy = 20
+rocketimg = r"""
+         /\         
+        /  \        
+       /    \       
+      /______\      
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+    /|   ||   |\    
+   / |   ||   | \   
+  /  |   ||   |  \  
+ /___|   ||   |___\ 
+     |        |     
+      \      /      
+       ||  ||       
+"""
 while True:
     _t = time.time()
     dt_1 = _t-t_1
@@ -58,25 +77,7 @@ while True:
     print_i += 1
     for i, log in enumerate(reports):
         print_at(0, print_i+i, (log['message']+(" "*40))[:40])
-    print_at_mult(rocketimgx, rocketimgy, """
-         /\\
-        /  \\
-       /    \\
-      /______\\
-     |        |
-     |        |
-     |        |
-     |        |
-     |        |
-     |        |
-    /|   ||   |\\
-   / |   ||   | \\
-  /  |   ||   |  \\
- /___|   ||   |___\\
-     |        |
-      \      /
-       ||  ||
-""")
+    print_at_mult(rocketimgx, rocketimgy, rocketimg)
     content = open("telemetry_mut.py", "r").read()
     if not content == lastcontent:
         lastcontent = content

@@ -16,14 +16,14 @@ def round(num, places=2):
     return float(s[0]+"." + s[1][:2])
 
 
-def report_message(msg):
+def report_message(msg, clear=False):
     requests.post(REPORTER_ADDR, json={
-                  "message": msg, "timestamp": time.time()})
+                  "message": msg, "timestamp": time.time(), 'clear': clear})
 
 
 def report_Profile(msg, fp):
     requests.post(REPORTER_ADDR, json={
-                  "message": msg, "timestamp": time.time(), "Flight Profile": fp})
+                  "message": msg, "timestamp": time.time(), "Flight Profile": fp, 'clear': True})
 
 
 def request_reports():

@@ -90,6 +90,12 @@ control.brakes = True
 parachute_flag_b = False
 parachute_flag_a = False
 report_message("begin control loop")
+msg1 = False
+msg2 = False
+msg3 = False
+msg4 = False
+msg5 = False
+msg6 = False
 while FLIGHT_PROFILE["Return Descent"]:
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
@@ -102,22 +108,64 @@ while FLIGHT_PROFILE["Return Descent"]:
             control.gear = True
             parachute_flag_b = True
     if alt < FLIGHT_PROFILE['Descent Alt'] and velocity[0] < -60:
-        report_message('half descent burn half      ')
+        msg1 = True
+        msg2 = False
+        msg3 = False
+        msg4 = False
+        msg5 = False
+        msg6 = False
+        if not msg1:
+            report_message('half descent burn half      ')
         control.throttle = .4
     if alt < 500 and velocity[0] < -15:
-        report_message('half descent burn half      ')
+        msg1 = False
+        msg2 = True
+        msg3 = False
+        msg4 = False
+        msg5 = False
+        msg6 = False
+        if not msg2:
+            report_message('half descent burn half      ')
         control.throttle = .4
     if alt < FLIGHT_PROFILE['Descent Alt'] and velocity[0] < -160:
-        report_message('max descent burn max        ')
+        msg1 = False
+        msg2 = False
+        msg3 = True
+        msg4 = False
+        msg5 = False
+        msg6 = False
+        if not msg3:
+            report_message('max descent burn max        ')
         control.throttle = 1
     if alt < FLIGHT_PROFILE['Descent Alt'] and alt > 500 and velocity[0] > -30:
-        report_message('cut descent burn cut        ')
+        msg1 = False
+        msg2 = False
+        msg3 = False
+        msg4 = True
+        msg5 = False
+        msg6 = False
+        if not msg4:
+            report_message('cut descent burn cut        ')
         control.throttle = 0
     if alt < FLIGHT_PROFILE['Descent Alt'] and alt < 500 and velocity[0] < -10:
-        report_message('quarter descent burn quarter')
+        msg1 = False
+        msg2 = False
+        msg3 = False
+        msg4 = False
+        msg5 = True
+        msg6 = False
+        if not msg5:
+            report_message('quarter descent burn quarter')
         control.throttle = .4
     if alt < FLIGHT_PROFILE['Descent Alt'] and alt < 500 and velocity[0] > -2:
-        report_message('cut descent burn cut        ')
+        msg1 = False
+        msg2 = False
+        msg3 = False
+        msg4 = False
+        msg5 = False
+        msg6 = True
+        if not msg6:
+            report_message('cut descent burn cut        ')
         control.throttle = 0
 
 ap.disengage()

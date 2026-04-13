@@ -18,10 +18,15 @@ o()
 
 @app.route("/", methods=["POST"])
 def root():
+    global _id
     if not os.path.exists(f"log-{_id}"):
         o()
     if flask.request.data:
         d = json.loads(flask.request.data)
+        if 'clear' in dict(d).keys():
+            if d['clear']:
+                _id = random.random()*9999
+                o()
         f = open(f"log-{_id}", "a")
         f.write(f"{json.dumps(d)}\n")
         f.close()

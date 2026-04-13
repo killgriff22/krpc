@@ -15,11 +15,11 @@ print_at(
     1, print_i, f"Brakes: {control.brakes} Gear: {control.gear}")
 print_i += 1
 print_at(
-    1, print_i, f"Radiators: {control.radiators} Panels: {control.solar_panels} Abort: {control.abort}")
+    1, print_i, f"Radiators: {control.radiators} Abort: {control.abort}")
 print_i += 1
 print_at(1, print_i, f"Stage: {control.current_stage}")
 print_i += 1
-print_at(1, print_i, f"Altitude: {alt} Apoapsis: {apo}")
+print_at(1, print_i, f"Altitude: {round(alt)} Apoapsis: {round(apo)}")
 print_i += 1
 print_at(1, print_i, f"Velocity, RPH:")
 print_i += 1

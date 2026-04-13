@@ -17,7 +17,8 @@ altitude = conn.add_stream(getattr, vessel.flight(), 'mean_altitude')
 apoapsis = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
 clear()
 reports = []
-t = time.time()
+t_1 = time.time()
+t_2 = time.time()
 ns = time.time_ns()
 _ns = time.time_ns()
 flight_profile = {}
@@ -28,15 +29,17 @@ rocketimgx = 40
 rocketimgy = 20
 while True:
     _t = time.time()
-    dt = _t-t
+    dt_1 = _t-t_1
+    dt_2 = _t-t_2
     velocity = vessel.flight(ref_frame).velocity
     alt = altitude()
     apo = apoapsis()
-    if dt >= 10:
-        t = _t
+    if dt_1 >= 10:
+        t_1 = _t
         os.system("git pull")
         continue
-    if dt % 1 > 1:
+    if dt_2 > 1:
+        t_2 = _t
         reports = request_reports()['data']
         while len(reports) > 16:
             reports.pop(0)

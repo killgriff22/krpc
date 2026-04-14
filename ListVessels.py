@@ -42,7 +42,8 @@ def SPC_DISPLAY():
         pull()
         clear()
     print_i = 1
-    display.blit(f"frametime {round((_ns-ns)/1000000000)}", (1, print_i))
+    display.blit(
+        f"frametime {round((_ns-ns)/1000000000)}, time to pull: {10-dt_1}", (1, print_i))
     print_i += 1
     display.blit(f"Active Vessel: {""}", (1, print_i))
     print_i += 1

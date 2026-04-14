@@ -1,4 +1,4 @@
-x = 90
+x = 40
 y = 10
 if not ActiveVessel:
     pagecontent = """

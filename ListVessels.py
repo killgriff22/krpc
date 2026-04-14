@@ -30,11 +30,11 @@ while True:
     ampm = f.renderText(time.strftime("%p"))
     Date = f.renderText(time.strftime("%d/%m/%Y"))
     display.blit(Hours, (display.size[0]//2-len(Hours.split("\n")[0])//2, display.size[1]//2-len(Hours.split("\n"))//2), front_modifier=Fore.RED +
-                 Back.RED, back_modifier=RESET)
+                 Back.BLACK, back_modifier=RESET)
     display.blit(ampm, (display.size[0]//2+len(Hours.split("\n")[0])//2+1, display.size[1]//2-len(ampm.split("\n"))//2),
-                 front_modifier=Fore.RED+Back.RED, back_modifier=RESET)
+                 front_modifier=Fore.RED+Back.BLACK, back_modifier=RESET)
     display.blit(Date, (display.size[0]//2-len(Date.split("\n")[0])//2, display.size[1]//2+3),
-                 front_modifier=Fore.RED+Back.RED, back_modifier=RESET)
+                 front_modifier=Fore.RED+Back.BLACK, back_modifier=RESET)
     displays.draw_all()
 
 

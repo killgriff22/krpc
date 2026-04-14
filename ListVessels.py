@@ -31,8 +31,8 @@ displays = cluster()
 display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)), SafeZone)
 displays.screens.append(display)
 
-"Main Loop"
-while True:
+
+def SPC_DISPLAY():
     display.fill(" ")
     _t_1 = time.time()
     dt_1 = _t_1-t_1
@@ -58,6 +58,10 @@ while True:
     display.blit(f"dt_2:{_t_2-_t_3} dt_3:{_t_3-_t_1}", (1, print_i))
     displays.draw_all()
 
+
+"Main Loop"
+while True:
+    SPC_DISPLAY()
 
 exit()
 

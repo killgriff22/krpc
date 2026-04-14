@@ -62,15 +62,15 @@ else:
             report_message(f"Delta to Apoapsis: {delta_altapo}")
             t = _t
         pass
-report_message('Faring separation')
-vessel.control.activate_next_stage()
+if altitude > 70_000:
+    report_message('Faring separation')
+    vessel.control.activate_next_stage()
 
+    report_message('Prepare for Reentry')
 
-report_message('Prepare for Reentry')
-
-if altitude() > 10000:
-    if not control.get_action_group(4):
-        control.toggle_action_group(4)
+    if altitude() > 10_000:
+        if not control.get_action_group(4):
+            control.toggle_action_group(4)
 
 
 report_message('Secondary parachute deployment')
@@ -79,7 +79,7 @@ vessel.control.toggle_action_group(2)
 if FLIGHT_PROFILE['Carrying Payload']:
     input("await user to circularize payload!\nPress enter when ready!")
 
-    while altitude() > 10000:
+    while altitude() > 10_000:
         pass
 
 

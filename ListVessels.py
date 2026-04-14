@@ -199,6 +199,9 @@ while True:
         ut = None
         altitude = None
         apoapsis = None
+    if ActiveVessel:
+        ActiveVessel_DISPLAY()
+        continue
     SPC_DISPLAY()
 
 exit()

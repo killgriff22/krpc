@@ -35,8 +35,6 @@ displays.screens.append(display)
 while True:
     display.fill(" ")
     _t_1 = time.time()
-    _t_2 = time.time()
-    _t_3 = time.time()
     dt_1 = _t_1-t_1
     if dt_1 > 10:
         t_1 = _t_1
@@ -49,12 +47,15 @@ while True:
     print_i += 1
     display.blit(f"Vessels:", (1, print_i))
     print_i += 1
+    _t_2 = time.time()
     for ls in spc.launch_sites:
         display.blit(f"{ls.name}: {ls.body.name}", (1, print_i))
         print_i += 1
+    _t_3 = time.time()
     for v in spc.vessels:
         display.blit(f"{v.name}: {v.recoverable} {v.crew}", (1, print_i,))
         print_i += 1
+    display.blit(f"dt_2:{_t_2-_t_3}", (1, print_i))
     displays.draw_all()
 
 

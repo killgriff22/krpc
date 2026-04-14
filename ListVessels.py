@@ -33,6 +33,7 @@ displays.screens.append(display)
 
 
 def SPC_DISPLAY():
+    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent
     display.fill(" ")
     _t_1 = time.time()
     dt_1 = _t_1-t_1

@@ -53,3 +53,9 @@ def print_at_mult(x, y, s):
 
 def clear():
     os.system("clear")
+
+
+def pull():
+    move_cursor(0, 0)
+    os.system("git pull")
+    move_cursor(0, 0)

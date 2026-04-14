@@ -2,7 +2,7 @@ import krpc
 import time
 import math
 from utils import *
-
+from MultiTerm import *
 # exit()
 
 conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
@@ -57,6 +57,7 @@ while True:
     dt = _t-t
     if dt > 10:
         t = _t
+        pull()
         clear()
     print_i = 1
     print_at(1, print_i, f"frametime {round((_ns-ns)/1000000000)}")

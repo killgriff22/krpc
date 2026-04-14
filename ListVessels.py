@@ -51,11 +51,11 @@ while True:
     for ls in spc.launch_sites:
         display.blit(f"{ls.name}: {ls.body.name}", (1, print_i))
         print_i += 1
-    _t_3 = time.time()
     for v in spc.vessels:
         display.blit(f"{v.name}: {v.recoverable} {v.crew}", (1, print_i,))
         print_i += 1
-    display.blit(f"dt_2:{_t_2-_t_3}", (1, print_i))
+    _t_3 = time.time()
+    display.blit(f"dt_2:{_t_2-_t_3} dt_3:{_t_3-_t_1}", (1, print_i))
     displays.draw_all()
 
 

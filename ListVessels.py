@@ -7,13 +7,18 @@ from MultiTerm import *
 import datetime
 from pyfiglet import Figlet
 import pyfiglet
+
+conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
+# input("Press Enter to continue...")
+spc = conn.space_center
+
 Init()
 clear()
 f = Figlet("ansi_regular")
 w, h = os.get_terminal_size()
 SafeZone = (1, 1)
 displays = cluster()
-display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)//2), SafeZone)
+display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)), SafeZone)
 displays.screens.append(display)
 while True:
     display.fill(error(" "))

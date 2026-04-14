@@ -1,8 +1,9 @@
 {
-    "python.languageServer": "Pylance",
-    "python.analysis.diagnosticSeverityOverrides": {
-        "reportMissingModuleSource": "none",
-        "reportShadowedImports": "none"
-    },
-    "circuitpython.board.version": null
+  "python.languageServer": "Pylance",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none",
+    "reportShadowedImports": "none"
+  },
+  "circuitpython.board.version": null,
+  "python-envs.defaultEnvManager": "ms-python.python:system"
 }

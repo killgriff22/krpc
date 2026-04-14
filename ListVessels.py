@@ -20,6 +20,12 @@ lastcontent = ""
 x = 100
 y = 10
 ActiveVessel = None
+control = None
+ref_frame = None
+ut = None
+altitude = None
+apoapsis = None
+
 
 "MultiTerm Setup"
 Init()
@@ -30,6 +36,116 @@ SafeZone = (1, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)), SafeZone)
 displays.screens.append(display)
+
+
+def ActiveVessel_DISPLAY():
+    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent
+    rocketimgx = 60
+    rocketimgy = 20
+    _t = time.time()
+    dt_1 = _t-t_1
+    dt_2 = _t-t_2
+    velocity = ActiveVessel.flight(ref_frame).velocity
+    alt = altitude()
+    apo = apoapsis()
+    time_to_next_pull = round(10-dt_1)
+    time_to_next_report_pull = round(1-dt_2)
+    extra_info = (
+        f" TTP:{time_to_next_pull} TTR:{time_to_next_report_pull}"+(" "*40))[:40]
+    print_i = 1
+    # display.blit(
+    #    f"frametime {round(()/1000000000)} {extra_info}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Vessel: {ActiveVessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Brakes: {control.brakes} Gear: {control.gear}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Radiators: {control.radiators} Abort: {control.abort}", (1, print_i))
+    print_i += 1
+    display.blit(f"Stage: {control.current_stage}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Altitude: {round(alt)} Apoapsis: {round(apoapsis(), 5)}", (1, print_i))
+    print_i += 1
+    display.blit(f"Velocity, RPH:", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"X: {round(velocity[0])}     R: {round(control.roll)}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Y: {round(velocity[1])}     P: {round(control.pitch)}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Z: {round(velocity[2])}     H: {round(control.yaw)}", (1, print_i))
+    print_i += 1
+    display.blit(
+        f"Time to Surface: {round(alt/(abs(velocity[0])+1))}", (1, print_i))
+    print_i += 1
+    display.blit(f"Flight Profile:", (1, print_i))
+    print_i += 1
+#    for i, k in enumerate(list(flight_profile.keys())):
+#        display.blit(1, i+print_i, f"{k}: {flight_profile[k]}")
+#    print_i += len(list(flight_profile.keys()))
+
+    rocketimg = rocketimg.split("\n")
+    r"""
+    |SAS       |       RCS|
+    |         /|\         |
+    |        / | \        |
+    |       /  |  \       |
+    |      /___|___\      |
+    |     |    |    |     |
+    |     |    |    |     |
+    |     |    |    |     |
+    |     |    |    |     |
+    |     |    |    |     |
+    |     |    |    |     |
+    |    /|   |||   |\    |
+    |   / |   |||   | \   |
+    |  /  |   |||   |  \  |
+    | /___|   |||   |___\ |
+    |     |    |    |     |
+    |      \   |   /      |
+    |       || | ||       |
+    |GEAR     |||    BRAKE|
+    """
+    line_i = 0
+    if control.sas:
+        rocketimg[line_i] = r"SAS"
+    else:
+        rocketimg[line_i] = r"   "
+    rocketimg[line_i] += "              "
+    if control.rcs:
+        rocketimg[line_i] += "RCS"
+    else:
+        rocketimg[line_i] += "   "
+    line_i = 18
+    if control.gear:
+        rocketimg[line_i] = r"GEAR"
+    else:
+        rocketimg[line_i] = r"    "
+    rocketimg[line_i] += "     "
+    t = control.throttle
+    c = "x"
+    if t < .1:
+        c = "x"
+    if t > .25:
+        c = "-"
+    if t > .5:
+        c = "="
+    if t > .9:
+        c = "|"
+    rocketimg[line_i] += c+c
+    rocketimg[line_i] += "    "
+
+    if control.brakes:
+        rocketimg[line_i] += "BRAKE"
+    else:
+        rocketimg[line_i] += "     "
+    rocketimg = "\n".join(rocketimg)
 
 
 def SPC_DISPLAY():
@@ -65,6 +181,24 @@ def SPC_DISPLAY():
 
 "Main Loop"
 while True:
+    try:
+        ActiveVessel = spc.active_vessel
+        control = ActiveVessel.control
+        ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
+            position=ActiveVessel.orbit.body.reference_frame,
+            rotation=ActiveVessel.surface_reference_frame)
+        ut = conn.add_stream(getattr, conn.space_center, 'ut')
+        altitude = conn.add_stream(
+            getattr, ActiveVessel.flight(), 'surface_altitude')
+        apoapsis = conn.add_stream(
+            getattr, ActiveVessel.orbit, 'apoapsis_altitude')
+    except:
+        ActiveVessel = None
+        control = None
+        ref_frame = None
+        ut = None
+        altitude = None
+        apoapsis = None
     SPC_DISPLAY()
 
 exit()

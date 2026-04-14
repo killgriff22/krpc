@@ -46,12 +46,14 @@ def SPC_DISPLAY():
     print_i += 1
     display.blit(f"Active Vessel: {""}", (1, print_i))
     print_i += 1
-    display.blit(f"Vessels:", (1, print_i))
+    display.blit(f"Launchpads:", (1, print_i))
     print_i += 1
     _t_2 = time.time()
     for ls in spc.launch_sites:
         display.blit(f"{ls.name}: {ls.body.name}", (1, print_i))
         print_i += 1
+    display.blit(f"Vessels:", (1, print_i))
+    print_i += 1
     for v in spc.vessels:
         display.blit(f"{v.name}: {v.recoverable} {v.crew}", (1, print_i,))
         print_i += 1

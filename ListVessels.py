@@ -11,7 +11,17 @@ import pyfiglet
 conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
 # input("Press Enter to continue...")
 spc = conn.space_center
+t_1 = time.time()
+t_2 = time.time()
+t_3 = time.time()
+ns = time.time_ns()
+_ns = time.time_ns()
+lastcontent = ""
+x = 100
+y = 10
+ActiveVessel = None
 
+"MultiTerm Setup"
 Init()
 clear()
 f = Figlet("ansi_regular")
@@ -20,37 +30,37 @@ SafeZone = (1, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)), SafeZone)
 displays.screens.append(display)
+
+"Main Loop"
 while True:
     display.fill(" ")
-    time = datetime.datetime.now()
-    H = 12 if int(time.strftime("%H")) % 12 == 0 else int(
-        time.strftime("%H")) % 12
-    Hours = f.renderText(time.strftime(
-        f"{H}/%M/%S"))
-    ampm = f.renderText(time.strftime("%p"))
-    Date = f.renderText(time.strftime("%d/%m/%Y"))
-    display.blit(Hours, (display.size[0]//2-len(Hours.split("\n")[0])//2, display.size[1]//2-len(Hours.split("\n"))//2), front_modifier=Fore.RED +
-                 Back.BLACK, back_modifier=RESET)
-    display.blit(ampm, (display.size[0]//2+len(Hours.split("\n")[0])//2+1, display.size[1]//2-len(ampm.split("\n"))//2),
-                 front_modifier=Fore.RED+Back.BLACK, back_modifier=RESET)
-    display.blit(Date, (display.size[0]//2-len(Date.split("\n")[0])//2, display.size[1]//2+3),
-                 front_modifier=Fore.RED+Back.BLACK, back_modifier=RESET)
+    _t_1 = time.time()
+    _t_2 = time.time()
+    _t_3 = time.time()
+    dt_1 = _t_1-t_1
+    if dt_1 > 10:
+        t_1 = _t_1
+        pull()
+        clear()
+    print_i = 1
+    display.blit(f"frametime {round((_ns-ns)/1000000000)}", (1, print_i))
+    print_i += 1
+    display.blit(f"Active Vessel: {""}", (1, print_i))
+    print_i += 1
+    display.blit(f"Vessels:", (1, print_i))
+    print_i += 1
+    for ls in spc.launch_sites:
+        display.blit(f"{ls.name}: {ls.body.name}", (1, print_i))
+        print_i += 1
+    for v in spc.vessels:
+        display.blit(f"{v.name}: {v.recoverable} {v.crew}", (1, print_i,))
+        print_i += 1
     displays.draw_all()
 
 
 exit()
 
-conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
-# input("Press Enter to continue...")
-spc = conn.space_center
-clear()
-t = time.time()
-ns = time.time_ns()
-_ns = time.time_ns()
-lastcontent = ""
-x = 100
-y = 10
-ActiveVessel = None
+
 pagecontent = """
   00000000000000001111111111111111222222222222222333333333333333444444444444444
   01234567879ABCEF0123456789ABCDEF0123456789ABCEF0123456789ABCEF0123456789ABCEF

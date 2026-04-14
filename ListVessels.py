@@ -36,10 +36,29 @@ SafeZone = (1, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, (h-SafeZone[1]*2)), SafeZone)
 displays.screens.append(display)
+rocketimg = r"""
+         /\         
+        /  \        
+       /    \       
+      /______\      
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+     |        |     
+    /|   ||   |\    
+   / |   ||   | \   
+  /  |   ||   |  \  
+ /___|   ||   |___\ 
+     |        |     
+      \      /      
+       ||  ||       
+"""
 
 
 def ActiveVessel_DISPLAY():
-    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent
+    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent, rocketimg
     rocketimgx = 60
     rocketimgy = 20
     _t = time.time()

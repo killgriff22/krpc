@@ -78,7 +78,7 @@ def ActiveVessel_DISPLAY():
         f" TTP:{time_to_next_pull} TTR:{time_to_next_report_pull}"+(" "*40))[:40]
     print_i = 1
     display.blit(
-        f"frametime {round((t_3-t_1))} {extra_info}", (1, print_i))
+        f"frametime {round((t_3-_t))} {extra_info}", (1, print_i))
     print_i += 1
     display.blit(
         f"Vessel: {ActiveVessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}", (1, print_i))

@@ -77,8 +77,8 @@ def ActiveVessel_DISPLAY():
     extra_info = (
         f" TTP:{time_to_next_pull} TTR:{time_to_next_report_pull}"+(" "*40))[:40]
     print_i = 1
-    # display.blit(
-    #    f"frametime {round(()/1000000000)} {extra_info}", (1, print_i))
+    display.blit(
+        f"frametime {round((t_3-t_1))} {extra_info}", (1, print_i))
     print_i += 1
     display.blit(
         f"Vessel: {ActiveVessel.name} SAS: {control.sas} RCS: {control.rcs} Throttle: {round(control.throttle*100)/100}", (1, print_i))
@@ -171,6 +171,7 @@ def ActiveVessel_DISPLAY():
         rocketimg[line_i] += "     "
     rocketimg = "\n".join(rocketimg)
     display.blit(rocketimg, (rocketimgx, rocketimgy))
+    t_3 = time.time()
     displays.draw_all()
 
 

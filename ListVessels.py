@@ -69,7 +69,6 @@ def ActiveVessel_DISPLAY():
     if dt_1 > 10:
         t_1 = _t
         pull()
-        clear()
     if dt_2 > 1:
         t_2 = _t
         reports = safe_request()['data']
@@ -191,7 +190,6 @@ def SPC_DISPLAY():
     if dt_1 > 10:
         t_1 = _t_1
         pull()
-        clear()
     print_i = 1
     display.blit(
         f"frametime {round((_ns-ns)/1000000000)}, time to pull: {10-dt_1}", (1, print_i))

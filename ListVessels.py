@@ -62,8 +62,13 @@ def ActiveVessel_DISPLAY():
     rocketimgx = 60
     rocketimgy = 20
     _t = time.time()
-    dt_1 = _t-t_1
     dt_2 = _t-t_2
+    display.fill(" ")
+    dt_1 = _t-t_1
+    if dt_1 > 10:
+        t_1 = _t
+        pull()
+        clear()
     velocity = ActiveVessel.flight(ref_frame).velocity
     alt = altitude()
     apo = apoapsis()

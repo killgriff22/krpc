@@ -189,6 +189,7 @@ def SPC_DISPLAY():
     dt_1 = _t_1-t_1
     if dt_1 > 10:
         t_1 = _t_1
+        print(os.getcwd())
         pull()
     print_i = 1
     display.blit(

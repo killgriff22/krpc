@@ -165,6 +165,7 @@ def ActiveVessel_DISPLAY():
     else:
         rocketimg[line_i] += "     "
     rocketimg = "\n".join(rocketimg)
+    display.blit(rocketimg, (rocketimgx, rocketimgy))
     displays.draw_all()
 
 

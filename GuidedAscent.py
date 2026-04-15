@@ -18,7 +18,6 @@ vessel = conn.space_center.active_vessel
 control = vessel.control
 control.brakes = False
 control.rcs = True
-control.sas = True
 report_Profile(vessel.name, FLIGHT_PROFILE)
 input("Flight Plan sent! await ready to launch!")
 ut = conn.add_stream(getattr, conn.space_center, 'ut')
@@ -29,7 +28,10 @@ ref_frame = conn.space_center.ReferenceFrame.create_hybrid(
     rotation=vessel.surface_reference_frame)
 ap = vessel.auto_pilot
 ap.reference_frame = vessel.surface_velocity_reference_frame
-vessel.auto_pilot.engage()
+# vessel.auto_pilot.engage()
+# vessel.auto_pilot.auto_tune = True
+# ap.target_direction = (0, 1, 0)
+
 vessel.control.throttle = 1
 time.sleep(1)
 report_message('Launch!')
@@ -62,15 +64,15 @@ else:
             report_message(f"Delta to Apoapsis: {delta_altapo}")
             t = _t
         pass
-if altitude > 70_000:
+if altitude() > 70_000:
     report_message('Faring separation')
     vessel.control.activate_next_stage()
 
     report_message('Prepare for Reentry')
 
     if altitude() > 10_000:
-        if not control.get_action_group(4):
-            control.toggle_action_group(4)
+        if not control.brakes:
+            control.brakes = True
 
 
 report_message('Secondary parachute deployment')
@@ -85,6 +87,9 @@ if FLIGHT_PROFILE['Carrying Payload']:
 
 report_message('Retrograde')
 # Point the vessel in the retrograde direction
+ap.engage()
+time.sleep(.1)
+control.rcs = True
 ap.target_direction = (0, -1, 0)
 # ap.wait()
 report_message('Brakes')
@@ -173,8 +178,8 @@ while FLIGHT_PROFILE["Return Descent"]:
         control.throttle = 0
     if abs(altitude()-FLIGHT_PROFILE['Landed Margin Alt']) < FLIGHT_PROFILE['Landed Margin']:
         break
-time.sleep(10)
-spc.screenshot(f"{random.randint(1000, 9999)}.png")
-spc.quickload()
+# time.sleep(10)
+# spc.screenshot(f"{random.randint(1000, 9999)}.png")
+# spc.quickload()
 
 exit()

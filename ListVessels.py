@@ -187,9 +187,9 @@ def SPC_DISPLAY():
     display.fill(" ")
     _t_1 = time.time()
     dt_1 = _t_1-t_1
+    display.blit(os.getcwd(), (0, 0))
     if dt_1 > 10:
         t_1 = _t_1
-        print(os.getcwd())
         pull()
     print_i = 1
     display.blit(

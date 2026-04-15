@@ -25,7 +25,8 @@ ref_frame = None
 ut = None
 altitude = None
 apoapsis = None
-
+reports = []
+flight_plan = {}
 
 "MultiTerm Setup"
 Init()
@@ -58,7 +59,7 @@ rocketimg = r"""
 
 
 def ActiveVessel_DISPLAY():
-    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent, rocketimg
+    global t_1, t_2, t_3, w, h, x, y, ns, _ns, spc, conn, ActiveVessel, lastcontent, rocketimg, reports, flight_plan
     rocketimgx = 60
     rocketimgy = 20
     _t = time.time()
@@ -69,6 +70,13 @@ def ActiveVessel_DISPLAY():
         t_1 = _t
         pull()
         clear()
+    if dt_2 > 1:
+        t_2 = _t
+        reports = safe_request()['data']
+        for report in reports:  # use latest flight plan in the list
+            if 'fp' in report.keys():
+                flight_plan = report['fp']
+        reports = reports[-20:]  # keep the latest few messages to display
     velocity = ActiveVessel.flight(ref_frame).velocity
     alt = altitude()
     apo = apoapsis()
@@ -171,8 +179,8 @@ def ActiveVessel_DISPLAY():
         rocketimg[line_i] += "     "
     rocketimg = "\n".join(rocketimg)
     display.blit(rocketimg, (rocketimgx, rocketimgy))
-    t_3 = time.time()
     displays.draw_all()
+    t_3 = time.time()
 
 
 def SPC_DISPLAY():

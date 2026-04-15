@@ -43,6 +43,13 @@ def request_reports():
     return resp.json()
 
 
+def safe_request():
+    try:
+        return request_reports()
+    except:
+        return {'data': []}
+
+
 def move_cursor(row, col):
     # ANSI sequence to move cursor to (row, col)
     sys.stdout.write(f"\x1B[{row};{col}H")

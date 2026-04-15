@@ -8,6 +8,7 @@ import datetime
 from pyfiglet import Figlet
 import pyfiglet
 
+os.chdir(os.path.dirname(__file__))
 conn = krpc.connect(name='Telemetry', address=KRPC_SERVER)
 # input("Press Enter to continue...")
 spc = conn.space_center
@@ -187,7 +188,6 @@ def SPC_DISPLAY():
     display.fill(" ")
     _t_1 = time.time()
     dt_1 = _t_1-t_1
-    display.blit(os.getcwd(), (0, 0))
     if dt_1 > 10:
         t_1 = _t_1
         pull()
